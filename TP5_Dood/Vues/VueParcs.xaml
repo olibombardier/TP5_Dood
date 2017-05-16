@@ -3,11 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TP5_Dood.VuesModeles"
         xmlns:local="clr-namespace:TP5_Dood"
         mc:Ignorable="d"
         Title="Parcs" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:ParcsVueModel />
+    </Window.DataContext>
     <Grid>
-        <TabControl>
+        <TabControl ItemsSource="{Binding Parcs}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Nom}" />
@@ -16,7 +20,7 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
-                        
+                        <TextBlock Text="{Binding Nom}"/>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
