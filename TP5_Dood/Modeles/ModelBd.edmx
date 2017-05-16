@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Parc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reservoir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type Huile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Seuil1" Type="float" Nullable="false" />
+          <Property Name="Seuil2" Type="float" Nullable="false" />
+          <Property Name="Seuil3" Type="float" Nullable="false" />
+          <Property Name="ParcId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Reservoir_Parc">
+          <End Role="Parc" Type="Self.Parc" Multiplicity="1" />
+          <End Role="Reservoir" Type="Self.Reservoir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservoir">
+              <PropertyRef Name="ParcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BdModelStoreContainer">
+          <EntitySet Name="Parc" EntityType="Self.Parc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservoir" EntityType="Self.Reservoir" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Reservoir_Parc" Association="Self.FK_Reservoir_Parc">
+            <End Role="Parc" EntitySet="Parc" />
+            <End Role="Reservoir" EntitySet="Reservoir" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Parc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reservoirs" Relationship="Self.FK_Reservoir_Parc" FromRole="Parc" ToRole="Reservoir" />
+        </EntityType>
+        <EntityType Name="Reservoir">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type_Huile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Seuil1" Type="Double" Nullable="false" />
+          <Property Name="Seuil2" Type="Double" Nullable="false" />
+          <Property Name="Seuil3" Type="Double" Nullable="false" />
+          <Property Name="ParcId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parc" Relationship="Self.FK_Reservoir_Parc" FromRole="Reservoir" ToRole="Parc" />
+        </EntityType>
+        <Association Name="FK_Reservoir_Parc">
+          <End Role="Parc" Type="Self.Parc" Multiplicity="1" />
+          <End Role="Reservoir" Type="Self.Reservoir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservoir">
+              <PropertyRef Name="ParcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BdEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Parcs" EntityType="Self.Parc" />
+          <EntitySet Name="Reservoirs" EntityType="Self.Reservoir" />
+          <AssociationSet Name="FK_Reservoir_Parc" Association="Self.FK_Reservoir_Parc">
+            <End Role="Parc" EntitySet="Parcs" />
+            <End Role="Reservoir" EntitySet="Reservoirs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BdModelStoreContainer" CdmEntityContainer="BdEntities">
+          <EntitySetMapping Name="Parcs">
+            <EntityTypeMapping TypeName="BdModel.Parc">
+              <MappingFragment StoreEntitySet="Parc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservoirs">
+            <EntityTypeMapping TypeName="BdModel.Reservoir">
+              <MappingFragment StoreEntitySet="Reservoir">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Type_Huile" ColumnName="Type Huile" />
+                <ScalarProperty Name="Seuil1" ColumnName="Seuil1" />
+                <ScalarProperty Name="Seuil2" ColumnName="Seuil2" />
+                <ScalarProperty Name="Seuil3" ColumnName="Seuil3" />
+                <ScalarProperty Name="ParcId" ColumnName="ParcId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
