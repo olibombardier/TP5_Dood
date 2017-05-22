@@ -6,24 +6,48 @@
         xmlns:vm="clr-namespace:TP5_Dood.VuesModeles"
         xmlns:local="clr-namespace:TP5_Dood"
         mc:Ignorable="d"
-        Title="Parcs" Height="350" Width="525">
+        Title="Parcs" Height="350" Width="800">
     <Window.DataContext>
         <vm:ParcsVueModel />
     </Window.DataContext>
     <Grid>
-        <TabControl ItemsSource="{Binding Parcs}">
-            <TabControl.ItemTemplate>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Parcs" Grid.Column="0" Grid.Row="0"/>
+        <ListView ItemsSource="{Binding Parcs}" SelectedItem="{Binding ParcActuel}" Grid.Column="0" Grid.Row="1">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Nom}" />
                 </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock Text="Réseervoirs" Grid.Column="1" Grid.Row="0"/>
+        <ListView ItemsSource="{Binding ParcActuel.Reservoirs}" SelectedItem="{Binding ReservoirActuel}" Grid.Column="1" Grid.Row="1">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Nom}"/>
-                    </Grid>
+                    <TextBlock Text="{Binding Nom}" />
                 </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Nom"/>
+            <TextBox Text="{Binding NomReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Type d'huile"/>
+            <TextBox Text="{Binding TypeHuileReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Seuil 1"/>
+            <TextBox Text="{Binding Seuil1ReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Seuil 2"/>
+            <TextBox Text="{Binding Seuil2ReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Seuil 3"/>
+            <TextBox Text="{Binding Seuil3ReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
     </Grid>
 </Window>
