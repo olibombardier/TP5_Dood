@@ -78,6 +78,11 @@ namespace TP5_Dood.VuesModeles
                 if (nomReservoirActuel != value)
                 {
                     nomReservoirActuel = value;
+                    if (nomReservoirActuel.Length > 255)
+                    {
+                        nomReservoirActuel = nomReservoirActuel.Substring(0, 255);
+                    }
+
                     NotifierProprieteAChangee();
                 }
             }
@@ -92,6 +97,11 @@ namespace TP5_Dood.VuesModeles
                 if (typeHuileReservoirActuel != value)
                 {
                     typeHuileReservoirActuel = value;
+                    if (typeHuileReservoirActuel.Length > 255)
+                    {
+                        nomReservoirActuel = nomReservoirActuel.Substring(0, 255);
+                    }
+
                     NotifierProprieteAChangee();
                 }
             }
@@ -105,7 +115,7 @@ namespace TP5_Dood.VuesModeles
             {
                 if (seuil1ReservoirActuel != value)
                 {
-                    seuil1ReservoirActuel = value;
+                    seuil1ReservoirActuel = Math.Max(0, Math.Min(1, value));
                     NotifierProprieteAChangee();
                 }
             }
@@ -119,7 +129,7 @@ namespace TP5_Dood.VuesModeles
             {
                 if (seuil2ReservoirActuel != value)
                 {
-                    seuil2ReservoirActuel = value;
+                    seuil2ReservoirActuel = Math.Max(0, Math.Min(1, value));
                     NotifierProprieteAChangee();
                 }
             }
@@ -133,7 +143,7 @@ namespace TP5_Dood.VuesModeles
             {
                 if (seuil3ReservoirActuel != value)
                 {
-                    seuil3ReservoirActuel = value;
+                    seuil3ReservoirActuel = Math.Max(0, Math.Min(1, value));
                     NotifierProprieteAChangee();
                 }
             }
