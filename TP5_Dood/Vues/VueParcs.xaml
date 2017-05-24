@@ -14,14 +14,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Parcs" Grid.Column="0" Grid.Row="0"/>
-        <ListView ItemsSource="{Binding Parcs}" SelectedItem="{Binding ParcActuel}" Grid.Column="0" Grid.Row="1">
+        <TextBlock Text="Parcs" Grid.Column="0" Grid.Row="0" Margin="5,0,0,0"/>
+        <ListView ItemsSource="{Binding Parcs}" SelectedItem="{Binding ParcActuel}" Grid.Column="0" Grid.Row="1" Margin="5,0,5,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Nom}" />
@@ -30,14 +30,14 @@
         </ListView>
 
         <TextBlock Text="Réseervoirs" Grid.Column="1" Grid.Row="0"/>
-        <ListView ItemsSource="{Binding ParcActuel.Reservoirs}" SelectedItem="{Binding ReservoirActuel}" Grid.Column="1" Grid.Row="1">
+        <ListView ItemsSource="{Binding ParcActuel.Reservoirs}" SelectedItem="{Binding ReservoirActuel}" Grid.Column="1" Grid.Row="1" Margin="0,0,5,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Nom}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.Column="2" Grid.Row="1">
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,5,0">
             <TextBlock Text="Nom"/>
             <TextBox Text="{Binding NomReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Type d'huile"/>
@@ -48,6 +48,10 @@
             <TextBox Text="{Binding Seuil2ReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Seuil 3"/>
             <TextBox Text="{Binding Seuil3ReservoirActuel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Button Content = "Enregistrer" Command="{Binding SauvegarderReservoir}"/>
+                <Button Content = "Annuler" Command="{Binding Annuler}" Margin="5,0,0,0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

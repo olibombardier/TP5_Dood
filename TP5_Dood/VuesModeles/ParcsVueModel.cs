@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TP5_Dood.VuesModeles;
 using TP5_Dood.Modeles;
+using System.Windows.Input;
 
 namespace TP5_Dood.VuesModeles
 {
@@ -135,6 +136,65 @@ namespace TP5_Dood.VuesModeles
                     seuil3ReservoirActuel = value;
                     NotifierProprieteAChangee();
                 }
+            }
+        }
+
+        private ICommand _sauvegarderReservoir;
+        public ICommand SauvegarderReservoir
+        {
+            get
+            {
+                if (_sauvegarderReservoir == null)
+                {
+                    _sauvegarderReservoir = new CommandeRelais<object>(
+
+                        (obj) =>
+                        {
+                            using (var entities = new BdEntities())
+                            {
+                                if(reservoirActuel != null)
+                                {
+                                    string ancienNom = NomReservoirActuel;
+                                    reservoirActuel.Nom = NomReservoirActuel;
+                                    reservoirActuel.Type_Huile = TypeHuileReservoirActuel;
+                                    reservoirActuel.Seuil1 = Seuil1ReservoirActuel;
+                                    reservoirActuel.Seuil2 = Seuil2ReservoirActuel;
+                                    reservoirActuel.Seuil3 = Seuil3ReservoirActuel;
+                                    entities.SaveChanges();
+                                }
+                            }
+                        }
+                    );
+                }
+
+                return _sauvegarderReservoir;
+            }
+        }
+
+        private ICommand _annuler;
+        public ICommand Annuler
+        {
+            get
+            {
+                if (_annuler == null)
+                {
+                    _annuler = new CommandeRelais<object>(
+
+                        (obj) =>
+                        {
+                            using (var entities = new BdEntities())
+                            {
+                                NomReservoirActuel = reservoirActuel.Nom;
+                                TypeHuileReservoirActuel = reservoirActuel.Type_Huile;
+                                Seuil1ReservoirActuel = reservoirActuel.Seuil1;
+                                Seuil2ReservoirActuel = reservoirActuel.Seuil2;
+                                Seuil3ReservoirActuel = reservoirActuel.Seuil3;
+                            }
+                        }
+                    );
+                }
+
+                return _annuler;
             }
         }
 

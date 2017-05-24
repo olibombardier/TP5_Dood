@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 /// Classe créée par Stephane Janvier
 
-namespace TP5_Dood.VuesModels
+namespace TP5_Dood.VuesModeles
 {
     /// <summary>
     /// Permet de créer une commande de type ICommand en ne spécifiant que les fonctions "Execute" et
