@@ -100,7 +100,7 @@ namespace TP5_Dood.VuesModeles
                     typeHuileReservoirActuel = value;
                     if (typeHuileReservoirActuel.Length > 255)
                     {
-                        nomReservoirActuel = nomReservoirActuel.Substring(0, 255);
+                        TypeHuileReservoirActuel = TypeHuileReservoirActuel.Substring(0, 255);
                     }
 
                     NotifierProprieteAChangee();

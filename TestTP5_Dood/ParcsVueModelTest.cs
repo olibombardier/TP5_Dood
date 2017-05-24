@@ -148,7 +148,7 @@ namespace TestTP5_Dood
             
             string typeHuileAttendu = new string('a', 255);
 
-            vueModel.NomReservoirActuel = new string('a', 256);
+            vueModel.TypeHuileReservoirActuel = new string('a', 256);
             
             Assert.AreEqual(typeHuileAttendu, vueModel.TypeHuileReservoirActuel);
         }
