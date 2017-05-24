@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace TP5_Dood.VuesModeles
 {
-    class ParcsVueModel : VueModeleBase, IDisposable
+    public class ParcsVueModel : VueModeleBase, IDisposable
     {
         private BdEntities context;
 

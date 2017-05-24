@@ -11,7 +11,7 @@ namespace TP5_Dood.VuesModeles
     /// <summary>
     /// Classe mère des vues-modèles du système.
     /// </summary>
-    internal class VueModeleBase : INotifyPropertyChanged, INotifyDataErrorInfo
+    public class VueModeleBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         /// <summary>
         /// Dictionnaire contenant les erreurs de validation. La clé est égal au nom de la propriété
