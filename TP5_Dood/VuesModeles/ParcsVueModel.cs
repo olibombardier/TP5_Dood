@@ -16,6 +16,7 @@ namespace TP5_Dood.VuesModeles
         public ParcsVueModel()
         {
             context = new BdEntities();
+            Random rand = new Random(DateTime.Now.GetHashCode());
         }
 
         ~ParcsVueModel()

@@ -37,19 +37,11 @@ namespace TestTP5_Dood
         {
             ParcsVueModel vueModel = new ParcsVueModel();
 
-            string nomAttendu = "Réservoir 1";
-            string typeHuileAttendu = "Huile usée";
-            double seuil1Attendu = -rand.Next();
-            double seuil2Attendu = 0.8;
-            double seuil3Attendu = 0.9;
+            double seuil1Attendu = 0;
 
-            vueModel.ReservoirActuel = new Reservoir() { Nom = "Réservoir 1", Type_Huile = "Huile usée", Seuil1 = 0, Seuil2 = 0.8, Seuil3 = 0.9 };
+            vueModel.Seuil1ReservoirActuel = -rand.Next();
 
-            Assert.AreEqual(nomAttendu, vueModel.NomReservoirActuel);
-            Assert.AreEqual(typeHuileAttendu, vueModel.TypeHuileReservoirActuel);
             Assert.AreEqual(seuil1Attendu, vueModel.Seuil1ReservoirActuel);
-            Assert.AreEqual(seuil2Attendu, vueModel.Seuil2ReservoirActuel);
-            Assert.AreEqual(seuil3Attendu, vueModel.Seuil3ReservoirActuel);
         }
 
         [TestMethod]
@@ -217,20 +209,12 @@ namespace TestTP5_Dood
         public void ReservoirTypeHuileTropLong()
         {
             ParcsVueModel vueModel = new ParcsVueModel();
-
-            string nomAttendu = "Réservoir 1";
+            
             string typeHuileAttendu = new string('a', 255);
-            double seuil1Attendu = 0.7;
-            double seuil2Attendu = 0.8;
-            double seuil3Attendu = 0.9;
 
-            vueModel.ReservoirActuel = new Reservoir() { Nom = "Réservoir 1", Type_Huile = new string('a', 256), Seuil1 = 0.7, Seuil2 = 0.8, Seuil3 = 0.9 };
-
-            Assert.AreEqual(nomAttendu, vueModel.NomReservoirActuel);
+            vueModel.NomReservoirActuel = new string('a', 256);
+            
             Assert.AreEqual(typeHuileAttendu, vueModel.TypeHuileReservoirActuel);
-            Assert.AreEqual(seuil1Attendu, vueModel.Seuil1ReservoirActuel);
-            Assert.AreEqual(seuil2Attendu, vueModel.Seuil2ReservoirActuel);
-            Assert.AreEqual(seuil3Attendu, vueModel.Seuil3ReservoirActuel);
         }
 
         [TestMethod]
@@ -278,19 +262,11 @@ namespace TestTP5_Dood
         {
             ParcsVueModel vueModel = new ParcsVueModel();
 
-            string nomAttendu = "Réservoir 1";
-            string typeHuileAttendu = "Huile usée";
-            double seuil1Attendu = -double.Epsilon;
-            double seuil2Attendu = 0.8;
-            double seuil3Attendu = 0.9;
+            double seuil1Attendu = 0;
 
-            vueModel.ReservoirActuel = new Reservoir() { Nom = "Réservoir 1", Type_Huile = "Huile usée", Seuil1 = 0, Seuil2 = 0.8, Seuil3 = 0.9 };
+            vueModel.Seuil1ReservoirActuel = -double.Epsilon;
 
-            Assert.AreEqual(nomAttendu, vueModel.NomReservoirActuel);
-            Assert.AreEqual(typeHuileAttendu, vueModel.TypeHuileReservoirActuel);
             Assert.AreEqual(seuil1Attendu, vueModel.Seuil1ReservoirActuel);
-            Assert.AreEqual(seuil2Attendu, vueModel.Seuil2ReservoirActuel);
-            Assert.AreEqual(seuil3Attendu, vueModel.Seuil3ReservoirActuel);
 
         }
 
@@ -515,34 +491,5 @@ namespace TestTP5_Dood
             Assert.AreEqual(seuil2Attendu, vueModel.Seuil2ReservoirActuel);
             Assert.AreEqual(seuil3Attendu, vueModel.Seuil3ReservoirActuel);
         }
-
-
-        /* Autre example de trucs à tester
-         * - Seuil1reservoirActuel lorsqu'on lui met une valeur négative (Devrait devenir 0)
-         * - Seuil1reservoirActuel lorsqu'on lui met une valeur plus haute que 1(100%) (Devrait devenir 1)
-         * - Le nom ou le type d'huile du réservoir actuel lorsqu'il y a plus de caractère que permis dans la BD
-         * - Autre chose peut-être je sais pas trop, au pire regarde l'énoncé pour voir combien il faut en faire
-         */
-
-        /*
-         * Exemple de Stephane
-         * 
-         * public void TestSelectionArticleNull()
-         * {
-         *     string NomArticleAttendu = null;
-         *     int quantiteArticleAttendu = 0;
-         *     decimal? coutArticleAttendu = 0;
-         *     decimal? prixVenteAttendu = 0;
-         * 
-         *     GestionArticlesModele GestionArticlesModeleReal = new GestionArticlesModele();
-         * 
-         *     GestionArticlesModeleReal.ArticleSelectionne = null;
-         * 
-         *     Assert.AreEqual(NomArticleAttendu, GestionArticlesModeleReal.NomArticle);
-         *     Assert.AreEqual(quantiteArticleAttendu, GestionArticlesModeleReal.QuantiteArticle);
-         *     Assert.AreEqual(coutArticleAttendu, GestionArticlesModeleReal.CoutArticle);
-         *     Assert.AreEqual(prixVenteAttendu, GestionArticlesModeleReal.PrixVenteArticle);
-         * }
-        */
     }
 }
